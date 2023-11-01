@@ -5,6 +5,7 @@ import Login from './component/Login';
 import SignUp from './component/SignUp';
 import UserList from './page/UserList';
 import UrerListId from './page/UrerListId';
+import UploadFile from './component/UploadFile';
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/userlist" element={<UserList />} />
         <Route path="/user-edit/:id" element ={<UrerListId />} />
+        <Route path="/uploadfile" element={<UploadFile />} />
       </Routes>
     </BrowserRouter>
   );
