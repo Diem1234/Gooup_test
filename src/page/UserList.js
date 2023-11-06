@@ -1,22 +1,30 @@
 import React from "react";
 import { users } from './../component/data/users';
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const UserList = () => {
-    const [userList, setUserList] = useState(users);
+    
+    const user = JSON.parse(localStorage.getItem('users'));
+    const [userList, setUserList] = useState(user);
     const navigate = useNavigate();
     const handleDelete = (userId) => {
         // Hiển thị cảnh báo trước khi xóa
         if (window.confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
             // Xóa người dùng khỏi danh sách
             const updatedUsers = userList.filter(u => u.id !== userId);
+            localStorage.setItem('users', JSON.stringify(updatedUsers));
+
             // Cập nhật danh sách người dùng
             setUserList(updatedUsers);
         }
     };
   return (
     <div className="container p-5">
+       <NavLink to='/signup' type="button" 
+             className="btn btn-primary float-end" >
+            Quay về
+          </NavLink>
       <div className="d-flex justify-content-center">
         <h1 className='mb-3 mt-3' style={{ color: 'red' }}>DANH SÁCH ĐĂNG KÝ</h1>
       </div>
@@ -33,7 +41,7 @@ const UserList = () => {
           </tr>
         </thead>
         <tbody>
-            {userList.map((u)=>(
+          {userList && userList.map((u)=>(
           <tr key = {u.id}>
             <th scope="row">{u.id}</th>
             <td>{u.name}</td>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -8,6 +8,14 @@ import * as Yup from 'yup';
 const SignUp = () => {
     const [verifed, setVerifed] = useState(false);
   const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  const [nextId, setNextId] = useState(0); // Biến đếm để theo dõi id tiếp theo
+
+  useEffect(() => {
+    const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+    setUsers(storedUsers);
+    setNextId(storedUsers.length); // Đặt id tiếp theo là độ dài mảng người dùng + 1
+  }, []);
   
 
   
@@ -24,6 +32,7 @@ const SignUp = () => {
   // }; 
   const formik = useFormik({
     initialValues: {
+      //id: nextId, // Thêm trường id với giá trị là id tiếp theo
       name: '',
       email: '',
       password: '',
@@ -41,6 +50,20 @@ const SignUp = () => {
     onSubmit: (values) => {
       // Xử lý logic khi submit form
       //navigate('/signin')
+      //  // Lấy mảng từ localStorage (nếu có) hoặc tạo một mảng mới
+      //  const users = JSON.parse(localStorage.getItem('users')) || [];
+
+       // Thêm đối tượng mới vào mảng
+       //users.push(values);
+ 
+      //  // Lưu mảng đã cập nhật vào localStorage
+      //  localStorage.setItem('users', JSON.stringify(users));
+      const updatedUsers = [...users, {id: nextId + 1, ...values}];
+      setUsers(updatedUsers);
+      setNextId(nextId + 1);
+      localStorage.setItem('users', JSON.stringify(updatedUsers));
+      alert("Dăng ký thành công!");
+      //const updatedUsers = [...users, values];
       console.log(values);
     }
   });
