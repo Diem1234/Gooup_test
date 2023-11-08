@@ -6,6 +6,7 @@ import SignUp from './component/SignUp';
 import UserList from './page/UserList';
 import UrerListId from './page/UrerListId';
 import UploadFile from './component/UploadFile';
+import Counter from './page/Counter';
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
         <Route path="/userlist" element={<UserList />} />
         <Route path="/user-edit/:id" element ={<UrerListId />} />
         <Route path="/uploadfile" element={<UploadFile />} />
+        <Route path="/counter" element={<Counter />} />
       </Routes>
     </BrowserRouter>
   );
