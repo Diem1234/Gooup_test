@@ -1,9 +1,15 @@
 import React from 'react'
+import { useContext } from 'react'
+import { CounterContext } from '../context/CounterContext'
+import { useSelector } from 'react-redux';
 
-const Label = ({number,className}) => {
+
+const Label = ({className}) => {
+  //const {count}= useContext(CounterContext)
+  const count = useSelector(state => state.count);
   return (
-    <div className='mt-5'>
-        <label className={className} style={{ width : '200px', height: '200px', fontSize: '170px'}}>{number}</label>
+    <div className=''>
+        <label className={className} style={{ width : '200px', height: '200px', fontSize: '170px'}}>{count}</label>
     </div>
   )
 }
