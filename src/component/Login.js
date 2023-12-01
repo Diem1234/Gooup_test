@@ -4,6 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import  jwt_decode  from 'jwt-decode';
+import { useDispatch } from "react-redux";
+import { loginFailure, loginSuccess } from "../actions/authActions";
 
 
 const Login = () => {
@@ -14,7 +16,7 @@ const Login = () => {
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPassword, setErrorPassword] = useState('');
   const navigate = useNavigate("");
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,6 +55,27 @@ const Login = () => {
     if (!password) {
       setErrorPassword('Không được bỏ trống!');
     }
+
+    // Xử lý thành công đăng nhập
+    const storedUser = JSON.parse(localStorage.getItem("users"));
+    if(storedUser){
+      const user = storedUser.find((user) => user.email === email && user.password === password);
+
+      if (user) {
+        // Xử lý đăng nhập thành công
+        dispatch(loginSuccess(user));
+        alert('Đăng nhập thành công!');
+        // Chuyển đến trang Dashboard
+        navigate('/dashboard');
+      } else {
+        setErrorEmail('Email không đúng!');
+        setErrorPassword('Mật khẩu không đúng!');
+        // Xử lý đăng nhập không thành công
+        dispatch(loginFailure('Sai thông tin đăng nhập, vui lòng thử lại!'));
+      } 
+   }else{
+      alert('Chưa có tài khoản!');}
+
   };
 
   return (

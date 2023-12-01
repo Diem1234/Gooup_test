@@ -10,6 +10,7 @@ import { CounterProvider } from "./context/CounterContext";
 import Parent from "./page/Parent";
 import { Provider } from "react-redux";
 import store from "./component/store";
+import Dashboard from "./page/Dashboard";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/uploadfile" element={<UploadFile />} />
           <Route path="/counter" element={<Counter />} />
           <Route path="/counters" element={<Parent />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </CounterProvider>
