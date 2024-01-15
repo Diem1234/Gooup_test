@@ -4,19 +4,24 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import  jwt_decode  from 'jwt-decode';
-import { useDispatch } from "react-redux";
-import { loginFailure, loginSuccess } from "../actions/authActions";
+// import { useDispatch } from "react-redux";
+// import { loginFailure, loginSuccess } from "../actions/authActions";
+import { AuthContext } from "../AuthContext/AuthContext";
+import { useContext } from "react";
 
 
 const Login = () => {
   const [verifed, setVerifed] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
   const [isTablet, setIsTablet] = useState(false);
-  const [errorEmail, setErrorEmail] = useState('');
-  const [errorPassword, setErrorPassword] = useState('');
-  const navigate = useNavigate("");
-  const dispatch = useDispatch();
+  // const [errorEmail, setErrorEmail] = useState('');
+  // const [errorPassword, setErrorPassword] = useState('');
+   const navigate = useNavigate("");
+  //const dispatch = useDispatch();
+
+  const { email, password, setEmail, setPassword, handleLogin,errorEmail,setErrorEmail,errorPassword,setErrorPassword } = useContext(AuthContext);
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,7 +44,7 @@ const Login = () => {
     setVerifed(true);
   }
 
-  const handleLogin = (e) => {
+  const handleLogins = (e) => {
     e.preventDefault();
     // Gửi dữ liệu đăng nhập đến server hoặc xử lý nó ở phía client tại đây
     console.log('Email:', email);
@@ -55,26 +60,27 @@ const Login = () => {
     if (!password) {
       setErrorPassword('Không được bỏ trống!');
     }
+    handleLogin();
+  //   // Xử lý thành công đăng nhập
+  //   const storedUser = JSON.parse(localStorage.getItem("users"));
+  //   if(storedUser){
+  //     const user = storedUser.find((user) => user.email === email && user.password === password);
 
-    // Xử lý thành công đăng nhập
-    const storedUser = JSON.parse(localStorage.getItem("users"));
-    if(storedUser){
-      const user = storedUser.find((user) => user.email === email && user.password === password);
-
-      if (user) {
-        // Xử lý đăng nhập thành công
-        dispatch(loginSuccess(user));
-        alert('Đăng nhập thành công!');
-        // Chuyển đến trang Dashboard
-        navigate('/dashboard');
-      } else {
-        setErrorEmail('Email không đúng!');
-        setErrorPassword('Mật khẩu không đúng!');
-        // Xử lý đăng nhập không thành công
-        dispatch(loginFailure('Sai thông tin đăng nhập, vui lòng thử lại!'));
-      } 
-   }else{
-      alert('Chưa có tài khoản!');}
+  //     if (user) {
+  //       // Xử lý đăng nhập thành công
+  //       dispatch(loginSuccess(user));
+  //       alert('Đăng nhập thành công!');
+  //       // Chuyển đến trang Dashboard
+    navigate('/dashboard');
+  //     } else {
+  //       setErrorEmail('Email không đúng!');
+  //       setErrorPassword('Mật khẩu không đúng!');
+  //       // Xử lý đăng nhập không thành công
+  //       // dispatch(loginFailure('Sai thông tin đăng nhập, vui lòng thử lại!'));
+  //       alert('Sai thông tin đăng nhập, vui lòng thử lại!');
+  //     } 
+  //  }else{
+  //     alert('Chưa có tài khoản!');}
 
   };
 
@@ -123,13 +129,13 @@ const Login = () => {
             <div className="mb-3">
               <ReCAPTCHA
                 className="mb-3"
-                sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                sitekey={process.env.REACT_APP_SITEKEY}
                 onChange={onChange}
               />
             </div>
             <button
               type="submit"
-              onClick={handleLogin}
+              onClick={handleLogins}
               className="btn btn-primary"
               disabled={!verifed}
             >
@@ -143,7 +149,7 @@ const Login = () => {
               ĐĂNG KÝ
             </NavLink>
             <div className="mb-3 mt-2">
-            <GoogleOAuthProvider clientId="829146636168-4vqrnea495l5laa7ferudhuevhlk52fp.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENTID}>
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   const details = jwt_decode(credentialResponse.credential);

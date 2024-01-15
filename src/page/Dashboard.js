@@ -4,10 +4,13 @@ import { logout } from "../actions/authActions";
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext/AuthContext';
+import Main from './layout/Main';
 
 const Dashboard = ({ storedUser, logout }) => {
   const navigate = useNavigate();
-
+  const {handleLogout} = useContext(AuthContext)
   useEffect(() => {
     const storedUser = localStorage.getItem("users");
     if (!storedUser) {
@@ -16,16 +19,16 @@ const Dashboard = ({ storedUser, logout }) => {
     }
   }, []);
 
-  const handleLogout = () => {
+  const handleLogouts = () => {
     localStorage.removeItem("users");
     logout();
     navigate("/signin");
   };
   return (
-    <div className='mx-auto  d-flex justify-content-center'>
-      <h1 >Hello , I'm Admin</h1>
-      <button className='btn btn-primary float-end' onClick={handleLogout}>Logout</button>
-    </div>
+    <Main title={'Home'} >
+      <h1 className='mx-auto  d-flex justify-content-center'>Home</h1>
+      <button className='btn btn-primary mx-auto  d-flex justify-content-center' onClick={handleLogouts}>Logout</button>
+    </Main>
   )
 }
 

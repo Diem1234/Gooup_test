@@ -51,7 +51,8 @@ const UserList = () => {
             <td>{u.age}</td>
             <td>{u.address}</td>
             <td><div>
-            <button type="button" onClick={()=>navigate(`/user-edit/${u.id}`)} className="btn btn-primary">Sửa</button> <button type="button" onClick={()=>handleDelete(u.id)} className="btn btn-danger">Xóa</button>
+            <button type="button" onClick={()=>navigate(`/user-edit/${u.id}`)} className="btn btn-primary">Sửa</button> 
+            <button type="button" onClick={()=>handleDelete(u.id)} className="btn btn-danger">Xóa</button>
             </div>
             </td>
           </tr>))}

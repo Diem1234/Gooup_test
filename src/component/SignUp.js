@@ -63,6 +63,7 @@ const SignUp = () => {
       setNextId(nextId + 1);
       localStorage.setItem('users', JSON.stringify(updatedUsers));
       alert("Dăng ký thành công!");
+      navigate('/signin')
       //const updatedUsers = [...users, values];
       console.log(values);
     }
@@ -167,7 +168,7 @@ const SignUp = () => {
               onChange={onChange}
             />
           </div>
-          <button
+          <button 
             type="submit"
             className="btn btn-primary"
             disabled={!verifed}
