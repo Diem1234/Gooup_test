@@ -21,6 +21,6 @@ Lưu tệp .gitignore sau khi bạn đã thêm các mục bạn muốn bỏ qua.
 
 Bây giờ, khi bạn thực hiện commit và push các thay đổi của bạn lên kho lưu trữ, Git sẽ bỏ qua các tệp và thư mục đã được chỉ định trong tệp .gitignore.
 # favorites ico
-## ico là một tệp hình ảnh sử dụng để đại diện cho trang web thông qua biểu tượng đại diện cho thương hiệu được hiển thị trong trình duyệt web. Tệp favicon. ico thường có `Kích thước`` 16×16 pixel hoặc 32×32 pixel và `Kiểu file` thường là .ico được đặt trong thư mục gốc của trang web để trình duyệt tìm thấy nó.
+## ico là một tệp hình ảnh sử dụng để đại diện cho trang web thông qua biểu tượng đại diện cho thương hiệu được hiển thị trong trình duyệt web. Tệp favicon. ico thường có `Kích thước 16×16 pixel hoặc 32×32 pixel và Kiểu file thường là .ico` được đặt trong thư mục gốc của trang web để trình duyệt tìm thấy nó.
 
 
