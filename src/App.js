@@ -24,6 +24,13 @@ import Coreui from "./component/Coreui";
 import OpenPopup from "./page/OpenPopup";
 import Dashboard from "./page/Dashboard";
 import Images from "./page/Images";
+import UserLists from './page/exercise37/UserLists';
+
+import AddUser from './page/exercise38/AddUser';
+import SeverityDemo from "./page/toast";
+import { UserProvider } from "./context/UserContext";
+import { ToastContext, ToastProvider } from "./context/ToastContext";
+
 function App({ Component }) {
   const value = {
   
@@ -32,31 +39,38 @@ function App({ Component }) {
   return (
     <AuthContextProvider>
     <Provider store={store}>
-    <CounterProvider><PrimeReactProvider value={value}>
+    <CounterProvider><UserProvider><ToastProvider>
+      <PrimeReactProvider value={value}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} >
             <Route  path="/dashboard" element={<Dashboardtow />} />
             <Route path="/profile" element={<Profile/>}/>
             
+            <Route path="/student" element={<UserLists/>}/>
+            <Route path="/students" element={<AddUser/>}/>
             <Route path="*" element={<NotFound />} />
+            <Route path="/toast" element={<SeverityDemo/>}/>
+            
+            <Route path="/demoprimerreact" element={<PrimerReact/>}/>
+            <Route path="/demomaterialui" element={<Coreui/>}/>
+            <Route path="/demobootstrap" element={<Profile/>}/> 
+            <Route  path="/uploadfile" element={<UploadFile />} />
+            <Route  path="/counter" element={<Counter />} />
+            <Route  path="/counters" element={<Parent />} />
           </Route>
-          <Route path="/images" element={<Images/>}/>
-          <Route path="/home" element={<Dashboard/>}/>
-          <Route path="/popup" element={<OpenPopup/>}/>     
-          <Route path="/demoprimerreact" element={<PrimerReact/>}/>
-          <Route path="/demomaterialui" element={<Coreui/>}/>
-          <Route path="/demobootstrap" element={<Profile/>}/>
+           <Route path="/images" element={<Images/>}/>
+            <Route path="/home" element={<Dashboard/>}/>
+            <Route path="/popup" element={<OpenPopup/>}/>    
           <Route  path="/signin" element={<Login />} />
           <Route  path="/signup" element={<SignUp />} />
           <Route  path="/userlist" element={<UserList />} />
           <Route  path="/user-edit/:id" element={<UrerListId />} />
-          <Route  path="/uploadfile" element={<UploadFile />} />
-          <Route  path="/counter" element={<Counter />} />
-          <Route  path="/counters" element={<Parent />} />
+
         </Routes>
+
       </BrowserRouter>
- </PrimeReactProvider>
+ </PrimeReactProvider></ToastProvider></UserProvider>
     </CounterProvider>
     </Provider></AuthContextProvider>
 

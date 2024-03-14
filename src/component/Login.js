@@ -8,6 +8,7 @@ import  jwt_decode  from 'jwt-decode';
 // import { loginFailure, loginSuccess } from "../actions/authActions";
 import { AuthContext } from "../AuthContext/AuthContext";
 import { useContext } from "react";
+import { Toast } from "primereact/toast";
 
 
 const Login = () => {
@@ -20,7 +21,7 @@ const Login = () => {
    const navigate = useNavigate("");
   //const dispatch = useDispatch();
 
-  const { email, password, setEmail, setPassword, handleLogin,errorEmail,setErrorEmail,errorPassword,setErrorPassword } = useContext(AuthContext);
+  const { email, password, setEmail, setPassword, handleLogin,errorEmail,setErrorEmail,errorPassword,setErrorPassword ,toast} = useContext(AuthContext);
 
 
   useEffect(() => {
@@ -86,6 +87,7 @@ const Login = () => {
 
   return (
     <div className="container">
+      <Toast ref={toast} position="top-left" />
       <div className="row mt-lg-3 rounded-2 d-flex justify-content-center mx-auto">
         <div className="d-flex justify-content-center">
           <img

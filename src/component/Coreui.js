@@ -120,7 +120,18 @@ const Coreui = () => {
             <td>Thornton</td>
             <td>@fat</td>
             </tr>
-          
+            <tr>
+ 
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            </tr>
+            <tr>
+            
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            </tr>
         </tbody>
         </table>
 

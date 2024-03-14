@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useRef, useState } from 'react';
+import { showToast } from '../utils/utils';
 
 
 export const AuthContext = createContext();
@@ -11,6 +12,7 @@ const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 const storedUser = JSON.parse(localStorage.getItem("users"));
   const handleLogin = () => {
+    
     const storedUser = JSON.parse(localStorage.getItem("users"));
     if(storedUser){
       const user = storedUser.find((user) => user.email === email && user.password === password);
@@ -25,11 +27,11 @@ const storedUser = JSON.parse(localStorage.getItem("users"));
         setErrorEmail('Email không đúng!');
         setErrorPassword('Mật khẩu không đúng!');
         // Xử lý đăng nhập không thành công
-        // dispatch(loginFailure('Sai thông tin đăng nhập, vui lòng thử lại!'));
-        alert('Sai thông tin đăng nhập, vui lòng thử lại!');
+        // dispatch(loginFailure('Sai thông tin đăng nhập, vui lòng thử lại!'))
+        
       } 
    }else{
-      alert('Chưa có tài khoản!');}
+    alert('Chưa có tài khoản')}
       
   };
 
